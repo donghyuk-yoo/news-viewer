@@ -1,42 +1,16 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useCallback } from 'react';
 import NewsList from './components/NewsList';
+import Categories from './components/Categories';
 
 function App() {
-  const [data, setData] = useState(null);
-  // const onClick = () => {
-  //   axios
-  //     .get('https://jsonplaceholder.typicode.com/todos/1')
-  //     .then((response) => {
-  //       setData(response.data);
-  //     });
-  // };
-  // apikey : a6e45e8981e440c7801593247aeba766
-  // async, await 사용, try,catch 사용하여 에러 처리
-  const onClick = async () => {
-    try {
-      const response = await axios.get(
-        'https://newsapi.org/v2/top-headlines?country=kr&category=entertainment&apiKey=a6e45e8981e440c7801593247aeba766',
-      );
-      setData(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const [category, setCategory] = useState('all');
+  const onSelect = useCallback((category) => setCategory(category), []);
+
   return (
-    <NewsList />
-    // <div>
-    //   <div>
-    //     <button onClick={onClick}>불러오기</button>
-    //   </div>
-    //   {data && (
-    //     <textarea
-    //       rows={7}
-    //       value={JSON.stringify(data, null, 2)}
-    //       readOnly={true}
-    //     />
-    //   )}
-    // </div>
+    <>
+      <Categories category={category} onSelect={onSelect} />
+      <NewsList category={category} />
+    </>
   );
 }
 
