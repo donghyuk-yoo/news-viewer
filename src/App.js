@@ -10,12 +10,12 @@ function App() {
   //       setData(response.data);
   //     });
   // };
-
-  // async, await
+  // apikey : a6e45e8981e440c7801593247aeba766
+  // async, await 사용, try,catch 사용하여 에러 처리
   const onClick = async () => {
     try {
       const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/todos/1',
+        'https://newsapi.org/v2/top-headlines?country=kr&category=entertainment&apiKey=a6e45e8981e440c7801593247aeba766',
       );
       setData(response.data);
     } catch (e) {
